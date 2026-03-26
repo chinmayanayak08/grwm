@@ -222,6 +222,25 @@ const css = `
     font-weight: 300;
     color: var(--plum);
   }
+  .results-sub {
+    font-size: 0.78rem;
+    color: var(--sage);
+    margin-top: 0.2rem;
+  }
+  .filter-summary {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .filter-pill {
+    background: var(--mist);
+    border-radius: 999px;
+    font-size: 0.65rem;
+    color: var(--ink);
+    padding: 3px 8px;
+    text-transform: capitalize;
+  }
   .results-count {
     font-size: 0.78rem;
     color: var(--dusty);
@@ -481,6 +500,19 @@ const css = `
     display: flex; align-items: center; justify-content: center;
     font-size: 0.8rem;
   }
+  .match-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 0.5rem;
+    background: #2f6f60;
+    color: #fff;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
 
   /* Day/Night indicator */
   .time-pill {
@@ -532,6 +564,7 @@ const OUTFIT_DB = [
     colors: ['#F9F5EC','#C9A84C','#D4B896'],
     tags: ['Formal','Evening','Traditional'], season: ['winter','autumn'], timeOfDay: 'night',
     occasions: ['wedding','formal'],
+    festivals: ['Diwali','Christmas'],
     matchesAccessory: ['gold','earring','necklace','bangles','silver'],
     colorPref: ['warm','monochrome'],
   },
@@ -544,6 +577,7 @@ const OUTFIT_DB = [
     colors: ['#1B3A5C','#C9A84C','#F9F5EC'],
     tags: ['Glamorous','Winter','Festive'], season: ['winter'], timeOfDay: 'night',
     occasions: ['wedding','party','festival'],
+    festivals: ['Diwali','Eid'],
     matchesAccessory: ['gold','earring','necklace'],
     colorPref: ['contrasting','bold'],
   },
@@ -556,6 +590,7 @@ const OUTFIT_DB = [
     colors: ['#6E1D2E','#8C9BAA','#F9F5EC'],
     tags: ['Festive','Ethnic','Evening'], season: ['winter','autumn'], timeOfDay: 'night',
     occasions: ['festival','party'],
+    festivals: ['Holi','Diwali'],
     matchesAccessory: ['silver','necklace','earring'],
     colorPref: ['bold','contrasting'],
   },
@@ -568,6 +603,7 @@ const OUTFIT_DB = [
     colors: ['#E8C4B8','#F9F5EC','#C9A84C'],
     tags: ['Casual','Day','Summer'], season: ['summer','spring'], timeOfDay: 'day',
     occasions: ['casual','outing'],
+    festivals: ['Holi','Birthday'],
     matchesAccessory: ['gold','bracelet','chain','necklace'],
     colorPref: ['pastel','monochrome','warm'],
   },
@@ -580,6 +616,7 @@ const OUTFIT_DB = [
     colors: ['#7A8C6E','#C4956A','#F9F5EC'],
     tags: ['Casual','Day','Earthy'], season: ['spring','summer'], timeOfDay: 'day',
     occasions: ['casual','brunch'],
+    festivals: ['Birthday','Holi'],
     matchesAccessory: ['leather','bracelet','earring'],
     colorPref: ['earthy','warm','contrasting'],
   },
@@ -592,6 +629,7 @@ const OUTFIT_DB = [
     colors: ['#1A1412','#C9A84C','#F9F5EC'],
     tags: ['Formal','Office','Minimal'], season: ['all'], timeOfDay: 'day',
     occasions: ['formal','office','interview'],
+    festivals: ['Christmas','Eid'],
     matchesAccessory: ['pearl','gold','silver','necklace','earring'],
     colorPref: ['monochrome','bold','contrasting'],
   },
@@ -618,6 +656,163 @@ const OUTFIT_DB = [
     occasions: ['casual','outdoor','festival'],
     matchesAccessory: ['gold','hoop','earring'],
     colorPref: ['warm','pastel'],
+    gender: ['female'],
+  },
+  {
+    id: 9, emoji: '🕴️', bg: 'linear-gradient(135deg,#2C3E50,#34495E)',
+    name: 'Charcoal Tailored Suit', occasion: 'Formal',
+    desc: 'A slim-fit charcoal suit with a crisp white shirt, perfect for professional events.',
+    pairing: 'Oxford shoes, leather belt, silver watch',
+    colorTip: 'Keep to monochrome and muted tones for a refined, classic impression.',
+    colors: ['#1A1412','#2C3E50','#F9F5EC'],
+    tags: ['Formal','Business','Evening'], season: ['all'], timeOfDay: 'day',
+    occasions: ['formal','office','wedding'],
+    matchesAccessory: ['leather','watch','belt'],
+    colorPref: ['monochrome','bold'],
+    gender: ['male'],
+  },
+  {
+    id: 10, emoji: '🧥', bg: 'linear-gradient(135deg,#6B8E23,#556B2F)',
+    name: 'Denim Jacket & Chinos', occasion: 'Casual',
+    desc: 'Relaxed denim jacket layered over a t-shirt and chinos. Great for weekend city outings.',
+    pairing: 'White sneakers, beanie, canvas backpack',
+    colorTip: 'Contrast denim with earthy neutrals, then brighten with a pop of white.',
+    colors: ['#7A8C6E','#F9F5EC','#1A1412'],
+    tags: ['Casual','Day','Outdoor'], season: ['spring','autumn'], timeOfDay: 'day',
+    occasions: ['casual','outing','travel'],
+    matchesAccessory: ['sneakers','beanie','backpack'],
+    colorPref: ['earthy','cool'],
+    gender: ['male'],
+  },
+  {
+    id: 11, emoji: '🧵', bg: 'linear-gradient(135deg,#d38df0,#bb6efb)',
+    name: 'Silk Cape Gown', occasion: 'Party',
+    desc: 'Luxurious silk cape gown in deep plum for evening glamour.',
+    pairing: 'Statement earrings, metallic clutch, strappy heels',
+    colorTip: 'Dark jewel tones are dramatic; keep jewelry in gold or silver only.',
+    colors: ['#4A1942','#C9A84C','#F9F5EC'],
+    tags: ['Evening','Gala','Formal'], season: ['winter','autumn'], timeOfDay: 'night',
+    occasions: ['party','wedding','gala'],
+    matchesAccessory: ['earring','clutch','heel'],
+    colorPref: ['bold','contrast'],
+    gender: ['female'],
+  },
+  {
+    id: 12, emoji: '🏙️', bg: 'linear-gradient(135deg,#264653,#2a9d8f)',
+    name: 'Satin Waistcoat Layer', occasion: 'Office',
+    desc: 'Slim-fit trousers with satin waistcoat to elevate office style.',
+    pairing: 'Leather lace-ups, matte belt, wristwatch',
+    colorTip: 'Monochrome navy palettes look polished and professional.',
+    colors: ['#1B3A5C','#2C3E50','#F9F5EC'],
+    tags: ['Office','Formal','Day'], season: ['all'], timeOfDay: 'day',
+    occasions: ['office','interview','formal'],
+    matchesAccessory: ['belt','watch','oxford'],
+    colorPref: ['monochrome','cool'],
+    gender: ['male'],
+  },
+  {
+    id: 13, emoji: '🦋', bg: 'linear-gradient(135deg,#f7a1c4,#e980ab)',
+    name: 'Pastel Chiffon Midi', occasion: 'Wedding',
+    desc: 'Soft chiffon midi dress in mint and lilac, perfect for spring ceremonies.',
+    pairing: 'Silver sandals, pearl studs, clutch',
+    colorTip: 'Pastels layer beautifully with neutrals to keep the look airy.',
+    colors: ['#E8C4B8','#F9F5EC','#A8C5B8'],
+    tags: ['Wedding','Day','Spring'], season: ['spring','summer'], timeOfDay: 'day',
+    occasions: ['wedding','party','brunch'],
+    matchesAccessory: ['sandals','pearl','clutch'],
+    colorPref: ['pastel','soft'],
+    gender: ['female'],
+  },
+  {
+    id: 14, emoji: '🎽', bg: 'linear-gradient(135deg,#4c9f70,#60b893)',
+    name: 'Sports Luxe Set', occasion: 'Casual',
+    desc: 'Matching knit pullover and joggers for sporty city style.',
+    pairing: 'Chunky sneakers, baseball cap, crossbody bag',
+    colorTip: 'Use one accent color to keep the look cohesive and sharp.',
+    colors: ['#7A8C6E','#F9F5EC','#1A1412'],
+    tags: ['Casual','Day','Sport'], season: ['spring','autumn'], timeOfDay: 'day',
+    occasions: ['casual','travel','outing'],
+    matchesAccessory: ['sneakers','cap','bag'],
+    colorPref: ['earthy','cool'],
+    gender: ['male','female'],
+  },
+  {
+    id: 15, emoji: '🧘', bg: 'linear-gradient(135deg,#8dc6a3,#6f9f8e)',
+    name: 'Relaxed Linen Set', occasion: 'Festival',
+    desc: 'Breathable linen top and pants for weekend festivals and day events.',
+    pairing: 'Flat sandals, woven bag, beaded jewelry',
+    colorTip: 'Neutral linens with a pop of color in accessories keeps it fresh.',
+    colors: ['#F9F5EC','#C9A84C','#7A8C6E'],
+    tags: ['Festival','Day','Comfort'], season: ['summer','spring'], timeOfDay: 'day',
+    occasions: ['festival','casual','outdoor'],
+    matchesAccessory: ['sandals','bag','jewelry'],
+    colorPref: ['pastel','earthy'],
+    gender: ['female'],
+  },
+  {
+    id: 16, emoji: '🤵', bg: 'linear-gradient(135deg,#0c1e2a,#1e3a4e)',
+    name: 'Midnight Dinner Suit', occasion: 'Formal',
+    desc: 'Velvet dinner jacket and tailored trousers for special evening events.',
+    pairing: 'Patent loafers, pocket square, cufflinks',
+    colorTip: 'Keep outerwear dark and rich; let your shoes be the subtle highlight.',
+    colors: ['#1A1412','#2C3E50','#C9A84C'],
+    tags: ['Formal','Night','Gala'], season: ['winter','autumn'], timeOfDay: 'night',
+    occasions: ['party','wedding','formal'],
+    matchesAccessory: ['cufflink','loafers','square'],
+    colorPref: ['monochrome','bold'],
+    gender: ['male'],
+  },
+  {
+    id: 17, emoji: '👠', bg: 'linear-gradient(135deg,#a34171,#c56d9a)',
+    name: 'Evening Slip Dress', occasion: 'Party',
+    desc: 'Satin slip dress with lace detail that works for dinners and dates.',
+    pairing: 'Strappy heels, clutch, layered necklaces',
+    colorTip: 'Bright makeup and minimalist accessories keep the focus on the silhouette.',
+    colors: ['#6E1D2E','#F9F5EC','#C9A84C'],
+    tags: ['Evening','Party','Chic'], season: ['all'], timeOfDay: 'night',
+    occasions: ['party','date','wedding'],
+    matchesAccessory: ['heels','necklace','clutch'],
+    colorPref: ['bold','contrast'],
+    gender: ['female'],
+  },
+  {
+    id: 18, emoji: '🧣', bg: 'linear-gradient(135deg,#5c6472,#9ea7b7)',
+    name: 'Layered Knit Combo', occasion: 'Casual',
+    desc: 'Wool blend sweater with corduroy pants for crisp autumn style.',
+    pairing: 'Chelsea boots, beanie, wool scarf',
+    colorTip: 'Layer textures and keep colors family-friendly; rust, navy, and camel work well.',
+    colors: ['#7A8C6E','#C9A84C','#1A1412'],
+    tags: ['Casual','Day','Autumn'], season: ['autumn','winter'], timeOfDay: 'day',
+    occasions: ['casual','outing','work'],
+    matchesAccessory: ['boots','scarf','beanie'],
+    colorPref: ['earthy','warm'],
+    gender: ['male','female'],
+  },
+  {
+    id: 19, emoji: '👔', bg: 'linear-gradient(135deg,#4b3f72,#573f7f)',
+    name: 'Print Shirt & Suit', occasion: 'Office',
+    desc: 'Unique print shirt under a grey suit for bold, smart workplace style.',
+    pairing: 'Derby shoes, leather briefcase, simple tie',
+    colorTip: 'Use the print color to guide tie and pocket square choices.',
+    colors: ['#2C3E50','#F9F5EC','#C9A84C'],
+    tags: ['Office','Day','Formal'], season: ['all'], timeOfDay: 'day',
+    occasions: ['office','interview','formal'],
+    matchesAccessory: ['tie','briefcase','derby'],
+    colorPref: ['bold','cool'],
+    gender: ['male'],
+  },
+  {
+    id: 20, emoji: '🌺', bg: 'linear-gradient(135deg,#f6c4d4,#ffc6b2)',
+    name: 'Tropical Maxi Dress', occasion: 'Festival',
+    desc: 'Flowing maxi with botanical print for bright summer celebrations.',
+    pairing: 'Wedge sandals, straw hat, layered bracelets',
+    colorTip: 'Pick one dominant shade from the print for matching accessories.',
+    colors: ['#E8C4B8','#F9F5EC','#C4956A'],
+    tags: ['Festival','Summer','Day'], season: ['summer'], timeOfDay: 'day',
+    occasions: ['festival','outdoor','casual'],
+    matchesAccessory: ['hat','sandal','bracelet'],
+    colorPref: ['pastel','warm'],
+    gender: ['female'],
   },
 ];
 
@@ -638,6 +833,7 @@ Given:
 - Occasion: ${params.occasion || 'any'}
 - Time of day: ${params.timeOfDay || 'any'}
 - Festival/Event: ${params.festival || 'none'}
+- Gender: ${params.gender || 'any'}
 - Color preference: ${params.colorPref || 'any'}
 - User's item: ${params.accessory || 'none specified'}
 
@@ -677,6 +873,7 @@ export default function App() {
   const [occasion, setOccasion] = useState('');
   const [timeOfDay, setTimeOfDay] = useState('');
   const [festival, setFestival] = useState('');
+  const [gender, setGender] = useState('');
   const [colorPref, setColorPref] = useState('');
   const [colorSwatch, setColorSwatch] = useState('');
   const [accessory, setAccessory] = useState('');
@@ -696,25 +893,69 @@ export default function App() {
     setLoading(true);
     setHasSearched(true);
 
-    // Local filter
-    let filtered = OUTFIT_DB.filter(o => {
-      if (season && !o.season.includes(season) && !o.season.includes('all')) return false;
-      if (occasion && !o.occasions.includes(occasion)) return false;
-      if (timeOfDay && o.timeOfDay !== timeOfDay) return false;
+    // Rank by match score and mark exact fit items
+    const scored = OUTFIT_DB.map(o => {
+      let score = 0;
+      let exact = true;
+
+      if (season) {
+        if (o.season.includes(season) || o.season.includes('all')) score += 2;
+        else { score -= 1; exact = false; }
+      }
+      if (occasion) {
+        if (o.occasions?.includes(occasion)) score += 2;
+        else { score -= 1; exact = false; }
+      }
+      if (timeOfDay) {
+        if (o.timeOfDay === timeOfDay) score += 2;
+        else { score -= 1; exact = false; }
+      }
+      if (festival) {
+        if (o.festivals?.includes(festival)) score += 2;
+        else { score -= 1; exact = false; }
+      }
+      if (gender) {
+        if (o.gender?.includes(gender)) score += 2;
+        else { score -= 1; exact = false; }
+      }
+      if (colorPref) {
+        if (o.colorPref?.includes(colorPref)) score += 1;
+        else { score -= 0.5; exact = false; }
+      }
       if (accessory) {
         const a = accessory.toLowerCase();
-        if (!o.matchesAccessory.some(k => a.includes(k))) return false;
+        const accessoryMatch = o.matchesAccessory?.some(k => a.includes(k));
+        if (accessoryMatch) score += 2;
+        else { score -= 0.5; exact = false; }
       }
-      if (colorPref && !o.colorPref.includes(colorPref)) return false;
-      return true;
+
+      return { ...o, score, isExact: exact };
     });
 
-    if (!season && !occasion && !timeOfDay && !accessory) filtered = OUTFIT_DB.slice(0, 4);
+    let filtered;
+
+    const exactMatches = scored.filter(item => item.isExact);
+
+    if (!season && !occasion && !timeOfDay && !accessory && !gender && !colorPref && !festival) {
+      filtered = OUTFIT_DB.slice(0, 8);
+    } else if (exactMatches.length > 0) {
+      filtered = exactMatches.sort((a, b) => b.score - a.score);
+    } else {
+      filtered = scored
+        .sort((a, b) => b.score - a.score)
+        .filter(item => item.score > 0);
+
+      if (!filtered.length) {
+        // fallback to best near matches
+        filtered = scored.sort((a, b) => b.score - a.score).slice(0, 8);
+      }
+    }
+
     setResults(filtered);
 
     // AI suggestions
     try {
-      const ai = await getAISuggestions({ season, occasion, timeOfDay, festival, colorPref, accessory });
+      const ai = await getAISuggestions({ season, occasion, timeOfDay, festival, gender, colorPref, accessory });
       setAiResults(ai.suggestions || []);
       setAiTip(ai.overallTip || '');
     } catch {
@@ -734,8 +975,11 @@ export default function App() {
       desc: r.desc, pairing: r.pairing, colorTip: r.colorTip,
       tags: r.tags, colors: [colorSwatch || '#C9A84C','#F9F5EC','#1A1412'],
       isAI: true,
+      isExact: false,
     })),
   ];
+
+  const exactCount = results.filter(r => r.isExact).length;
 
   return (
     <>
@@ -781,6 +1025,17 @@ export default function App() {
                 {['casual','formal','party','wedding','festival','office'].map(o => (
                   <button key={o} className={`chip ${occasion===o?'selected':''}`} onClick={() => setOccasion(o===occasion?'':o)}>
                     {o.charAt(0).toUpperCase()+o.slice(1)}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Gender</label>
+              <div className="chips">
+                {['male','female'].map(g => (
+                  <button key={g} className={`chip ${gender===g?'selected':''}`} onClick={() => setGender(g===gender?'':g)}>
+                    {g.charAt(0).toUpperCase()+g.slice(1)}
                   </button>
                 ))}
               </div>
@@ -888,7 +1143,22 @@ export default function App() {
               <>
                 {!loading && allResults.length > 0 && (
                   <div className="results-header">
-                    <div className="results-title">Your looks</div>
+                    <div>
+                      <div className="results-title">Your looks</div>
+                      <div className="results-sub">{exactCount > 0 ? `${exactCount} exact match${exactCount!==1?'es':''}` : 'Closest matches'}</div>
+                      <div className="filter-summary">
+                        {[
+                          season && `Season: ${season}`,
+                          occasion && `Occasion: ${occasion}`,
+                          gender && `Gender: ${gender}`,
+                          timeOfDay && `Time: ${timeOfDay}`,
+                          festival && `Festival: ${festival}`,
+                          colorPref && `Color: ${colorPref}`,
+                        ].filter(Boolean).map((t, i) => (
+                          <span key={i} className="filter-pill">{t}</span>
+                        ))}
+                      </div>
+                    </div>
                     <div className="results-count">{allResults.length} suggestion{allResults.length!==1?'s':''}</div>
                     {timeOfDay && (
                       <span className={`time-pill ${timeOfDay}`}>
@@ -926,6 +1196,7 @@ export default function App() {
                           </div>
                           <div className="card-body">
                             <div className="card-occasion">{outfit.occasion}</div>
+                            {outfit.isExact && !outfit.isAI && <div className="match-badge">Exact match</div>}
                             <div className="card-name">{outfit.name}</div>
                             <div className="card-desc">{outfit.desc}</div>
                             <div className="card-tags">
