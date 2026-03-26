@@ -388,6 +388,82 @@ const css = `
   .skeleton-line { height: 10px; border-radius: 5px; background: linear-gradient(90deg, #f0ebe6 25%, #e8e2dc 50%, #f0ebe6 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; margin-bottom: 10px; }
   @keyframes shimmer { to { background-position: -200% 0; } }
 
+  /* Intro Page */
+  .intro-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--plum) 0%, var(--rose) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow: hidden;
+  }
+  .intro-content {
+    text-align: center;
+    z-index: 1;
+    animation: fadeIn 0.8s ease;
+  }
+  .intro-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  .intro-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    animation: slideUp 0.8s ease 0.2s both;
+  }
+  .intro-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2.5rem;
+    animation: slideUp 0.8s ease 0.4s both;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .intro-quote {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 3rem;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    animation: slideUp 0.8s ease 0.6s both;
+  }
+  .intro-btn {
+    background: var(--cream);
+    color: var(--plum);
+    border: none;
+    padding: 14px 48px;
+    border-radius: 50px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.3s;
+    animation: slideUp 0.8s ease 0.8s both;
+  }
+  .intro-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  .intro-btn:active {
+    transform: translateY(-1px);
+  }
+
   /* Detail modal */
   .modal-overlay {
     position: fixed; inset: 0;
@@ -556,7 +632,7 @@ const SWATCHES = [
 
 const OUTFIT_DB = [
   {
-    id: 1, emoji: '👘', bg: 'linear-gradient(135deg,#e8d5c4,#c9a08a)',
+    id: 1, emoji: '👘', imageUrl: '/grwm/outfits/ivory_silk_saree.png', bg: 'linear-gradient(135deg,#e8d5c4,#c9a08a)',
     name: 'Ivory Silk Saree', occasion: 'Wedding',
     desc: 'Ivory georgette draped elegantly with gold zari border. Timeless and ethereal.',
     pairing: 'Gold jhumkas, strappy heels, embroidered clutch',
@@ -567,9 +643,10 @@ const OUTFIT_DB = [
     festivals: ['Diwali','Christmas'],
     matchesAccessory: ['gold','earring','necklace','bangles','silver'],
     colorPref: ['warm','monochrome'],
+    gender: ['female'],
   },
   {
-    id: 2, emoji: '👗', bg: 'linear-gradient(135deg,#1b3a5c,#2d5986)',
+    id: 2, emoji: '👗', imageUrl: '/grwm/outfits/navy_velvet_lehenga.png', bg: 'linear-gradient(135deg,#1b3a5c,#2d5986)',
     name: 'Navy Velvet Lehenga', occasion: 'Celebration',
     desc: 'Deep navy velvet lehenga with intricate golden embroidery. Regal winter wedding attire.',
     pairing: 'Gold chandelier earrings, statement necklace, heels',
@@ -580,9 +657,10 @@ const OUTFIT_DB = [
     festivals: ['Diwali','Eid'],
     matchesAccessory: ['gold','earring','necklace'],
     colorPref: ['contrasting','bold'],
+    gender: ['female'],
   },
   {
-    id: 3, emoji: '✨', bg: 'linear-gradient(135deg,#6E1D2E,#9E3355)',
+    id: 3, emoji: '✨', imageUrl: '/grwm/outfits/burgundy_anarkali.png', bg: 'linear-gradient(135deg,#6E1D2E,#9E3355)',
     name: 'Burgundy Anarkali', occasion: 'Festival',
     desc: 'Floor-length anarkali in deep burgundy with mirror work. Perfect for festive evenings.',
     pairing: 'Oxidised silver jewellery, kolhapuri sandals',
@@ -593,9 +671,10 @@ const OUTFIT_DB = [
     festivals: ['Holi','Diwali'],
     matchesAccessory: ['silver','necklace','earring'],
     colorPref: ['bold','contrasting'],
+    gender: ['female'],
   },
   {
-    id: 4, emoji: '🌸', bg: 'linear-gradient(135deg,#E8C4B8,#d4a090)',
+    id: 4, emoji: '🌸', imageUrl: '/grwm/outfits/blush_linen_coord.png', bg: 'linear-gradient(135deg,#E8C4B8,#d4a090)',
     name: 'Blush Linen Co-ord', occasion: 'Casual',
     desc: 'Breezy blush linen matching set. Effortlessly chic for warm afternoons.',
     pairing: 'Nude mules, minimalist gold chain, canvas tote',
@@ -606,9 +685,10 @@ const OUTFIT_DB = [
     festivals: ['Holi','Birthday'],
     matchesAccessory: ['gold','bracelet','chain','necklace'],
     colorPref: ['pastel','monochrome','warm'],
+    gender: ['female'],
   },
   {
-    id: 5, emoji: '🌿', bg: 'linear-gradient(135deg,#7A8C6E,#9aad8a)',
+    id: 5, emoji: '🌿', imageUrl: '/grwm/outfits/sage_shirt_dress.png', bg: 'linear-gradient(135deg,#7A8C6E,#9aad8a)',
     name: 'Sage Shirt Dress', occasion: 'Casual',
     desc: 'A crisp sage shirt-dress with a belted waist. Versatile from brunch to gallery visits.',
     pairing: 'Tan leather belt, white sneakers or block heels',
@@ -619,9 +699,10 @@ const OUTFIT_DB = [
     festivals: ['Birthday','Holi'],
     matchesAccessory: ['leather','bracelet','earring'],
     colorPref: ['earthy','warm','contrasting'],
+    gender: ['female'],
   },
   {
-    id: 6, emoji: '🖤', bg: 'linear-gradient(135deg,#1A1412,#2c2420)',
+    id: 6, emoji: '🖤', imageUrl: '/grwm/outfits/black_crepe_blazer.png', bg: 'linear-gradient(135deg,#1A1412,#2c2420)',
     name: 'Black Crepe Blazer Set', occasion: 'Formal',
     desc: 'Tailored black crepe blazer with wide-leg trousers. Corporate power dressing done right.',
     pairing: 'Pearl studs, classic heels, structured handbag',
@@ -632,9 +713,10 @@ const OUTFIT_DB = [
     festivals: ['Christmas','Eid'],
     matchesAccessory: ['pearl','gold','silver','necklace','earring'],
     colorPref: ['monochrome','bold','contrasting'],
+    gender: ['female'],
   },
   {
-    id: 7, emoji: '🌙', bg: 'linear-gradient(135deg,#4A1942,#7B2D74)',
+    id: 7, emoji: '🌙', imageUrl: '/grwm/outfits/plum_sequin_gown.png', bg: 'linear-gradient(135deg,#4A1942,#7B2D74)',
     name: 'Plum Sequin Gown', occasion: 'Party',
     desc: 'Floor-length plum sequin gown. A head-to-toe statement for milestone evenings.',
     pairing: 'Diamond drop earrings, metallic clutch, strappy sandals',
@@ -644,9 +726,10 @@ const OUTFIT_DB = [
     occasions: ['party','gala','birthday'],
     matchesAccessory: ['diamond','silver','earring','bracelet'],
     colorPref: ['bold','contrasting'],
+    gender: ['female'],
   },
   {
-    id: 8, emoji: '☀️', bg: 'linear-gradient(135deg,#F7D794,#e5b84e)',
+    id: 8, emoji: '☀️', imageUrl: '/grwm/outfits/mustard_wrap_dress.png', bg: 'linear-gradient(135deg,#F7D794,#e5b84e)',
     name: 'Mustard Wrap Dress', occasion: 'Summer',
     desc: 'Flowy mustard wrap dress in lightweight fabric. Ideal for outdoor summer events.',
     pairing: 'Espadrilles, wicker bag, minimal gold hoops',
@@ -659,7 +742,7 @@ const OUTFIT_DB = [
     gender: ['female'],
   },
   {
-    id: 9, emoji: '🕴️', bg: 'linear-gradient(135deg,#2C3E50,#34495E)',
+    id: 9, emoji: '🕴️', imageUrl: '/grwm/outfits/charcoal_tailored_suit.png', bg: 'linear-gradient(135deg,#2C3E50,#34495E)',
     name: 'Charcoal Tailored Suit', occasion: 'Formal',
     desc: 'A slim-fit charcoal suit with a crisp white shirt, perfect for professional events.',
     pairing: 'Oxford shoes, leather belt, silver watch',
@@ -672,7 +755,7 @@ const OUTFIT_DB = [
     gender: ['male'],
   },
   {
-    id: 10, emoji: '🧥', bg: 'linear-gradient(135deg,#6B8E23,#556B2F)',
+    id: 10, emoji: '🧥', imageUrl: '/grwm/outfits/denim_jacket_chinos.png', bg: 'linear-gradient(135deg,#6B8E23,#556B2F)',
     name: 'Denim Jacket & Chinos', occasion: 'Casual',
     desc: 'Relaxed denim jacket layered over a t-shirt and chinos. Great for weekend city outings.',
     pairing: 'White sneakers, beanie, canvas backpack',
@@ -685,7 +768,7 @@ const OUTFIT_DB = [
     gender: ['male'],
   },
   {
-    id: 11, emoji: '🧵', bg: 'linear-gradient(135deg,#d38df0,#bb6efb)',
+    id: 11, emoji: '🧵', imageUrl: '/grwm/outfits/silk_cape_gown.png', bg: 'linear-gradient(135deg,#d38df0,#bb6efb)',
     name: 'Silk Cape Gown', occasion: 'Party',
     desc: 'Luxurious silk cape gown in deep plum for evening glamour.',
     pairing: 'Statement earrings, metallic clutch, strappy heels',
@@ -698,7 +781,7 @@ const OUTFIT_DB = [
     gender: ['female'],
   },
   {
-    id: 12, emoji: '🏙️', bg: 'linear-gradient(135deg,#264653,#2a9d8f)',
+    id: 12, emoji: '🏙️', imageUrl: '/grwm/outfits/satin_waistcoat_layer.png', bg: 'linear-gradient(135deg,#264653,#2a9d8f)',
     name: 'Satin Waistcoat Layer', occasion: 'Office',
     desc: 'Slim-fit trousers with satin waistcoat to elevate office style.',
     pairing: 'Leather lace-ups, matte belt, wristwatch',
@@ -711,7 +794,7 @@ const OUTFIT_DB = [
     gender: ['male'],
   },
   {
-    id: 13, emoji: '🦋', bg: 'linear-gradient(135deg,#f7a1c4,#e980ab)',
+    id: 13, emoji: '🦋', imageUrl: '/grwm/outfits/pastel_chiffon_midi.png', bg: 'linear-gradient(135deg,#f7a1c4,#e980ab)',
     name: 'Pastel Chiffon Midi', occasion: 'Wedding',
     desc: 'Soft chiffon midi dress in mint and lilac, perfect for spring ceremonies.',
     pairing: 'Silver sandals, pearl studs, clutch',
@@ -724,7 +807,7 @@ const OUTFIT_DB = [
     gender: ['female'],
   },
   {
-    id: 14, emoji: '🎽', bg: 'linear-gradient(135deg,#4c9f70,#60b893)',
+    id: 14, emoji: '🎽', imageUrl: '/grwm/outfits/sports_luxe_set.png', bg: 'linear-gradient(135deg,#4c9f70,#60b893)',
     name: 'Sports Luxe Set', occasion: 'Casual',
     desc: 'Matching knit pullover and joggers for sporty city style.',
     pairing: 'Chunky sneakers, baseball cap, crossbody bag',
@@ -737,7 +820,7 @@ const OUTFIT_DB = [
     gender: ['male','female'],
   },
   {
-    id: 15, emoji: '🧘', bg: 'linear-gradient(135deg,#8dc6a3,#6f9f8e)',
+    id: 15, emoji: '🧘', imageUrl: '/grwm/outfits/relaxed_linen_set.png', bg: 'linear-gradient(135deg,#8dc6a3,#6f9f8e)',
     name: 'Relaxed Linen Set', occasion: 'Festival',
     desc: 'Breathable linen top and pants for weekend festivals and day events.',
     pairing: 'Flat sandals, woven bag, beaded jewelry',
@@ -750,7 +833,7 @@ const OUTFIT_DB = [
     gender: ['female'],
   },
   {
-    id: 16, emoji: '🤵', bg: 'linear-gradient(135deg,#0c1e2a,#1e3a4e)',
+    id: 16, emoji: '🤵', imageUrl: '/grwm/outfits/midnight_dinner_suit.png', bg: 'linear-gradient(135deg,#0c1e2a,#1e3a4e)',
     name: 'Midnight Dinner Suit', occasion: 'Formal',
     desc: 'Velvet dinner jacket and tailored trousers for special evening events.',
     pairing: 'Patent loafers, pocket square, cufflinks',
@@ -763,7 +846,7 @@ const OUTFIT_DB = [
     gender: ['male'],
   },
   {
-    id: 17, emoji: '👠', bg: 'linear-gradient(135deg,#a34171,#c56d9a)',
+    id: 17, emoji: '👠', imageUrl: 'https://placehold.co/500x500/eaeaea/555?text=Evening+Slip+Dress', bg: 'linear-gradient(135deg,#a34171,#c56d9a)',
     name: 'Evening Slip Dress', occasion: 'Party',
     desc: 'Satin slip dress with lace detail that works for dinners and dates.',
     pairing: 'Strappy heels, clutch, layered necklaces',
@@ -776,7 +859,7 @@ const OUTFIT_DB = [
     gender: ['female'],
   },
   {
-    id: 18, emoji: '🧣', bg: 'linear-gradient(135deg,#5c6472,#9ea7b7)',
+    id: 18, emoji: '🧣', imageUrl: 'https://placehold.co/500x500/eaeaea/555?text=Layered+Knit+Combo', bg: 'linear-gradient(135deg,#5c6472,#9ea7b7)',
     name: 'Layered Knit Combo', occasion: 'Casual',
     desc: 'Wool blend sweater with corduroy pants for crisp autumn style.',
     pairing: 'Chelsea boots, beanie, wool scarf',
@@ -789,7 +872,7 @@ const OUTFIT_DB = [
     gender: ['male','female'],
   },
   {
-    id: 19, emoji: '👔', bg: 'linear-gradient(135deg,#4b3f72,#573f7f)',
+    id: 19, emoji: '👔', imageUrl: 'https://placehold.co/500x500/eaeaea/555?text=Print+Shirt+And+Suit', bg: 'linear-gradient(135deg,#4b3f72,#573f7f)',
     name: 'Print Shirt & Suit', occasion: 'Office',
     desc: 'Unique print shirt under a grey suit for bold, smart workplace style.',
     pairing: 'Derby shoes, leather briefcase, simple tie',
@@ -802,7 +885,7 @@ const OUTFIT_DB = [
     gender: ['male'],
   },
   {
-    id: 20, emoji: '🌺', bg: 'linear-gradient(135deg,#f6c4d4,#ffc6b2)',
+    id: 20, emoji: '🌺', imageUrl: 'https://placehold.co/500x500/eaeaea/555?text=Tropical+Maxi+Dress', bg: 'linear-gradient(135deg,#f6c4d4,#ffc6b2)',
     name: 'Tropical Maxi Dress', occasion: 'Festival',
     desc: 'Flowing maxi with botanical print for bright summer celebrations.',
     pairing: 'Wedge sandals, straw hat, layered bracelets',
@@ -826,49 +909,37 @@ const FESTIVALS = {
 
 // ── AI suggestion engine ──────────────────────────────────────────────
 async function getAISuggestions(params) {
-  const prompt = `You are a fashion stylist AI for the app "Get Ready With Me".
-
-Given:
-- Weather/Season: ${params.season || 'any'}
-- Occasion: ${params.occasion || 'any'}
-- Time of day: ${params.timeOfDay || 'any'}
-- Festival/Event: ${params.festival || 'none'}
-- Gender: ${params.gender || 'any'}
-- Color preference: ${params.colorPref || 'any'}
-- User's item: ${params.accessory || 'none specified'}
-
-Suggest 2 outfit ideas. Respond ONLY with valid JSON (no markdown, no explanation):
-{
-  "suggestions": [
-    {
-      "name": "outfit name",
-      "desc": "2 sentence description",
-      "pairing": "accessories and shoes to pair",
-      "colorTip": "color styling tip",
-      "tags": ["tag1","tag2","tag3"],
-      "emoji": "single relevant emoji"
-    }
-  ],
-  "overallTip": "one sentence general styling advice for these conditions"
-}`;
-
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      messages: [{ role: "user", content: prompt }],
-    }),
+  // Mocking AI response due to missing API key / CORS restrictions
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve({
+        suggestions: [
+          {
+            name: "Curated AI Look",
+            desc: `A highly personalized outfit tailored for your ${params.season || ''} ${params.occasion || 'occasion'}. Featuring exactly the right balance.`,
+            pairing: "Minimalist watch, leather bag",
+            colorTip: `Based on your request, sticking to ${params.colorPref || 'neutral'} tones works best.`,
+            tags: ["AI Pick", "Exclusive"],
+            emoji: "✨"
+          },
+          {
+            name: "The Alternative",
+            desc: "A bold secondary option if you want to make a statement.",
+            pairing: "Statement necklace, bold frames",
+            colorTip: "Don't be afraid to experiment with contrast and rich textures.",
+            tags: ["Bold", "Statement"],
+            emoji: "🔥"
+          }
+        ],
+        overallTip: "This is a mocked AI response showing the shape of the data that would normally be generated!"
+      });
+    }, 1500);
   });
-  const data = await response.json();
-  const text = data.content?.map(b => b.text || '').join('');
-  const clean = text.replace(/```json|```/g, '').trim();
-  return JSON.parse(clean);
 }
 
 // ── App ───────────────────────────────────────────────────────────────
 export default function App() {
+  const [showIntro, setShowIntro] = useState(true);
   const [season, setSeason] = useState('');
   const [occasion, setOccasion] = useState('');
   const [timeOfDay, setTimeOfDay] = useState('');
@@ -916,7 +987,7 @@ export default function App() {
       }
       if (gender) {
         if (o.gender?.includes(gender)) score += 2;
-        else { score -= 1; exact = false; }
+        else { score -= 100; exact = false; }
       }
       if (colorPref) {
         if (o.colorPref?.includes(colorPref)) score += 1;
@@ -984,6 +1055,22 @@ export default function App() {
   return (
     <>
       <style>{css}</style>
+      
+      {showIntro ? (
+        <div className="intro-container">
+          <div className="intro-content">
+            <div className="intro-icon">👗</div>
+            <h1 className="intro-title">Get <span style={{fontStyle:'italic',color:'#D4B896'}}>Ready</span> With Me</h1>
+            <div className="intro-subtitle">Your Personal Styling Companion</div>
+            <p className="intro-quote">
+              "Fashion is not something that exists in dresses only. Fashion is in the sky, in the street; fashion has to do with ideas, the way we live, what is happening." — Coco Chanel
+            </p>
+            <button className="intro-btn" onClick={() => setShowIntro(false)}>
+              Enter Studio ✦
+            </button>
+          </div>
+        </div>
+      ) : (
       <div className="app">
         {/* Header */}
         <header className="header">
@@ -1189,7 +1276,17 @@ export default function App() {
                             <div className="saved-badge">♥</div>
                           )}
                           <div className="card-visual" style={{background:outfit.bg}}>
-                            {outfit.emoji}
+                            {outfit.imageUrl && (
+                              <img 
+                                src={outfit.imageUrl} 
+                                alt={outfit.name} 
+                                style={{width:'100%',height:'100%',objectFit:'cover'}} 
+                                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} 
+                              />
+                            )}
+                            <div style={{display: outfit.imageUrl ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', fontSize: '3.5rem'}}>
+                              {outfit.emoji}
+                            </div>
                             {outfit.isAI && (
                               <span style={{position:'absolute',top:10,left:10,background:'rgba(0,0,0,0.3)',color:'#fff',fontSize:'0.65rem',padding:'2px 8px',borderRadius:10,letterSpacing:'0.08em'}}>✦ AI Pick</span>
                             )}
@@ -1274,6 +1371,7 @@ export default function App() {
           </div>
         )}
       </div>
+      )}
     </>
   );
 }
